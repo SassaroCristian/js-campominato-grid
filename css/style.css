@@ -1,0 +1,32 @@
+:root {
+    --num-cells-per-row: 10;
+}
+
+* {
+    box-sizing: border-box;
+    padding: 0; 
+    margin: 0;
+}
+
+body {
+    background-color: rgb(24, 24, 24);
+    color: white;
+}
+
+#grid {
+    display: flex;
+    fLex-wrap: wrap;
+    margin: 0 auto; 
+    height: 700px;
+    width: 700px;
+}
+
+.square {
+    border: solid 1px white;
+    height: calc(100% / var(--num-cells-per-row) );
+    width: calc(100% / var(--num-cells-per-row) );
+}
+
+.highlight {
+    background-color: rgb(255, 0, 0);
+}

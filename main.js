@@ -1,55 +1,57 @@
 
-let grid = document.getElementById("grid");
+let gridContainer = document.getElementById("gridContainer");
 let playBtn = document.getElementById("playBtn");
 let difficultySelector = document.getElementById("difficultySelector");
+let selectedDifficulty = '';
 
-function createCellsEasy () {
-    let numCelle = 99;
-    for (let i = 0; i <= numCelle; i++) {
-    const cella = document.createElement ("div")
-    cella.classList.add ("squareSmall");
-    cella.textContent = i + 1;
-    grid.appendChild (cella);
-    
-    cella.addEventListener ("click", function () {
-    cella.classList.toggle("highlight");
-    console.log(cella.textContent = i + 1)
+function createCells(numCelle) {
+    gridContainer.innerHTML = "";
+
+    for (let i = 0; i < numCelle; i++) {
+        const cella = document.createElement("div");
+
+        if (selectedDifficulty === "easy") {
+            cella.classList.add("squareEasy");
+        } else if (selectedDifficulty === "medium") {
+            cella.classList.add("squareMedium");
+        } else if (selectedDifficulty === "hard") {
+            cella.classList.add("squareHard");
+        }
+
+        cella.textContent = i + 1;
+        gridContainer.appendChild(cella);
+
+        const cellValue = bombOrFlower();
+        cella.setAttribute("data-value", cellValue);
+
+        cella.addEventListener("click", function () {
+            if (cellValue === "bomb") {
+                cella.classList.toggle("highlightBomb");
+                alert('Hai schiacciato una bomba💣💥... Game Over!');
+            } else if (cellValue === "flower") {
+                cella.classList.toggle("highlightFlower");
+            }
+            console.log(cellValue);
         });
     }
 }
 
-function createCellsMedium () {
-    let numCelle = 79;
-    for (let i = 0; i <= numCelle; i++) {
-    const cella = document.createElement ("div")
-    cella.classList.add ("squareMedium");
-    cella.textContent = i + 1;
-    grid.appendChild (cella);
-    
-    cella.addEventListener ("click", function () {
-    cella.classList.toggle("highlight");
-    console.log(cella.textContent = i + 1)
-        });
+function bombOrFlower() {
+    const randomValue = Math.floor(Math.random() * 2);
+    if (randomValue === 0) {
+        return "bomb";
+    } else {
+        return "flower";
     }
 }
 
-function createCellsHard () {
-    let numCelle = 49;
-    for (let i = 0; i <= numCelle; i++) {
-    const cella = document.createElement ("div")
-    cella.classList.add ("square");
-    cella.textContent = i + 1;
-    grid.appendChild (cella);
-    
-    cella.addEventListener ("click", function () {
-    cella.classList.toggle("highlight");
-    console.log(cella.textContent = i + 1)
-        });
+playBtn.addEventListener("click", function () {
+    selectedDifficulty = difficultySelector.value;
+    if (selectedDifficulty === "easy") {
+        createCells(100);
+    } else if (selectedDifficulty === "medium") {
+        createCells(64);
+    } else if (selectedDifficulty === "hard") {
+        createCells(25);
     }
-}
-
-// function difficulty (){
-//     if 
-// }
-
-playBtn.addEventListener("click", createCellsHard);
+});

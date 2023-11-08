@@ -3,24 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/style.css">
     <title>Document</title>
 </head>
 <body>
     <header>
-        <select name="" id="difficultySelector">
+       <h1>MINE SWEEPER</h1>
+    </header>
+    <main>
+        <select class="select-arounder" name="" id="difficultySelector">
             <option id="easy" value="easy">Easy</option>
             <option id="medium" value="medium">Medium</option>
             <option id="hard" value="hard">Hard</option>
         </select>
-        <div id="result"></div>
-        <button id="playBtn">Play</button>
-    </header>
-    <main>
+        <button class="buttons-container button-arounder" id="playBtn">Play</button>
         <div id="gridContainer"></div>
+        <div id="result"></div>
+        
     </main>
     <footer>
-        <p>Made with love by boolean</p>
+        <p>Made with love by Cristian</p>
     </footer>
     <script src="main.js"></script>
 </body>

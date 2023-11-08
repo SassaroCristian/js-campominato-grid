@@ -3,7 +3,7 @@ let gridContainer = document.getElementById("gridContainer");
 let playBtn = document.getElementById("playBtn");
 let difficultySelector = document.getElementById("difficultySelector");
 let selectedDifficulty = '';
-
+const result = document.getElementById('result');
 function createCells(numCelle) {
     gridContainer.innerHTML = "";
 
@@ -12,10 +12,13 @@ function createCells(numCelle) {
 
         if (selectedDifficulty === "easy") {
             cella.classList.add("squareEasy");
+            gridContainer.classList.add("bg-game");
         } else if (selectedDifficulty === "medium") {
             cella.classList.add("squareMedium");
+            gridContainer.classList.add("bg-game");
         } else if (selectedDifficulty === "hard") {
             cella.classList.add("squareHard");
+            gridContainer.classList.add("bg-game");
         }
 
         cella.textContent = i + 1;
@@ -27,7 +30,9 @@ function createCells(numCelle) {
         cella.addEventListener("click", function () {
             if (cellValue === "bomb") {
                 cella.classList.toggle("highlightBomb");
-                alert('Hai schiacciato una bomba💣💥... Game Over!');
+                result.textContent = 'Hai schiacciato una bomba💣💥... Game Over!';
+                gridContainer.classList.add("gameOver");
+                result.classList.add("bg-result");
             } else if (cellValue === "flower") {
                 cella.classList.toggle("highlightFlower");
             }
@@ -45,9 +50,14 @@ function bombOrFlower() {
     }
 }
 
+function startGame () {
+    
+}
 playBtn.addEventListener("click", function () {
     selectedDifficulty = difficultySelector.value;
-    if (selectedDifficulty === "easy") {
+    if (gridContainer.classList.contains("gameOver")) {
+         location.reload();
+    } else if (selectedDifficulty === "easy") {
         createCells(100);
     } else if (selectedDifficulty === "medium") {
         createCells(64);

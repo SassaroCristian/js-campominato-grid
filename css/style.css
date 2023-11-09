@@ -39,18 +39,19 @@ footer {
     font-family: Arial, sans-serif;
     text-align: center;
     font-weight: bold;
+    margin: 0 auto;
     margin-top: 10px;
-    margin-left: calc(50% - 300px);
-    width: 600px;
+    width: 400px;
     padding: 20px;
+
 }
 
 #gridContainer {
     display: flex;
     flex-wrap: wrap;
     margin: auto; 
-    height: 40vh;
-    width: 20vw;
+    height: 400px;
+    width: 400px;
 }
 
 .bg-game {
@@ -87,6 +88,12 @@ footer {
     background-size: cover;
 }
 
+.score {
+    margin:  auto;
+    padding: 10px;
+    background-color: cornflowerblue;
+    width: 400px;
+}
 
 .gameOver {
     display: none !important;

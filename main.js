@@ -1,11 +1,16 @@
 
 let gridContainer = document.getElementById("gridContainer");
 let playBtn = document.getElementById("playBtn");
+let newGameBtn = document.getElementById("newGameBtn");
 let difficultySelector = document.getElementById("difficultySelector");
 let selectedDifficulty = '';
 const result = document.getElementById('result');
+let bombCount = 0;
+let score = document.getElementById("score")
+let scoreCount = 0;
 function createCells(numCelle) {
     gridContainer.innerHTML = "";
+    bombCount = 0;
 
     for (let i = 0; i < numCelle; i++) {
         const cella = document.createElement("div");
@@ -21,7 +26,7 @@ function createCells(numCelle) {
             gridContainer.classList.add("bg-game");
         }
 
-        cella.textContent = i + 1;
+        
         gridContainer.appendChild(cella);
 
         const cellValue = bombOrFlower();
@@ -34,7 +39,10 @@ function createCells(numCelle) {
                 gridContainer.classList.add("gameOver");
                 result.classList.add("bg-result");
             } else if (cellValue === "flower") {
-                cella.classList.toggle("highlightFlower");
+                cella.classList.add("highlightFlower");
+                scoreCount += 100; 
+                score.textContent = `Score: ${scoreCount}`;
+                score.classList.add("score");
             }
             console.log(cellValue);
         });
@@ -42,9 +50,14 @@ function createCells(numCelle) {
 }
 
 function bombOrFlower() {
-    const randomValue = Math.floor(Math.random() * 2);
-    if (randomValue === 0) {
-        return "bomb";
+    if (bombCount < 16) {
+        const randomValue = Math.floor(Math.random() * 2);
+        if (randomValue === 0) {
+            bombCount++;
+            return "bomb";
+        } else {
+            return "flower";
+        }
     } else {
         return "flower";
     }
@@ -53,11 +66,10 @@ function bombOrFlower() {
 function startGame () {
     
 }
+
 playBtn.addEventListener("click", function () {
     selectedDifficulty = difficultySelector.value;
-    if (gridContainer.classList.contains("gameOver")) {
-         location.reload();
-    } else if (selectedDifficulty === "easy") {
+    if (selectedDifficulty === "easy") {
         createCells(100);
     } else if (selectedDifficulty === "medium") {
         createCells(64);
@@ -65,3 +77,12 @@ playBtn.addEventListener("click", function () {
         createCells(25);
     }
 });
+
+newGameBtn.addEventListener("click", function() {
+    if (gridContainer.classList.contains("gameOver")) {
+        location.reload();
+   } else {
+
+   }
+});
+
